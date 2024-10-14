@@ -1,0 +1,88 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Employee {
+  id               String       @id @unique
+  firstName        String
+  middleName       String
+  lastName         String
+  branchId         String
+  salary           Int
+  contactNumber    Int
+  dateHired        DateTime
+  role             String
+  emailAdress      String
+  password         String
+  assignedBranch   Branch     @relation(fields: [assignedBranchId], references: [id])
+  assignedBranchId Int
+}
+
+model Branch {
+  id                        Int            @id @default(autoincrement())
+  barangay                  String
+  municipality              String
+  province                  String
+  openingTime               String
+  closingTime               String
+  emailAddress              String
+  assignEmployee            Employee[]
+  dateEstablish             DateTime
+  inventories               Inventory[]
+}
+
+model Customer {
+  id                        Int            @id @default(autoincrement())
+  customerName              String
+  customerContact           String
+  orders                    Transaction[]  
+}
+
+model Service {
+  id                 Int          @id @default(autoincrement())
+  serviceName        String
+  service            String[]
+  serviceCode        String
+  totalPrice         Int
+  description        String 
+  transactionPkg     Transaction  @relation(fields: [transactionPkgId], references: [id])
+  transactionPkgId   Int
+}
+
+model Addon {
+  id                 Int          @id @default(autoincrement())
+  addonName          String
+  addonPrice         Int
+  addonPkg           Transaction  @relation(fields: [addonPkgId], references: [id])
+  addonPkgId         Int
+}
+
+model Transaction {
+  id                 Int            @id @default(autoincrement())
+  laundryService     Service[]
+  quantity           Int
+  price              Int
+  addon              Addon[]
+  customerName       Customer       @relation(fields: [customerId], references: [id])
+  customerId         Int
+}
+
+model Inventory {
+  id                 Int          @id @default(autoincrement())
+  branchId           Branch       @relation(fields: [branchInventoryId], references: [id])
+  branchInventoryId  Int   
+  arielPoweder       Int
+  downyFabcon        Int
+  zonrox             Int
+}
