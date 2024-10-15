@@ -14,16 +14,15 @@ datasource db {
 }
 
 model Employee {
-  id               String       @id @unique
+  id               Int       @id @unique @default(autoincrement())
   firstName        String
   middleName       String
   lastName         String
-  branchId         String
   salary           Int
-  contactNumber    Int
+  contactNumber    String
   dateHired        DateTime
   role             String
-  emailAdress      String
+  emailAddress      String
   password         String
   assignedBranch   Branch     @relation(fields: [assignedBranchId], references: [id])
   assignedBranchId Int
@@ -34,8 +33,8 @@ model Branch {
   barangay                  String
   municipality              String
   province                  String
-  openingTime               String
-  closingTime               String
+  openingTime               DateTime
+  closingTime               DateTime
   emailAddress              String
   assignEmployee            Employee[]
   dateEstablish             DateTime
