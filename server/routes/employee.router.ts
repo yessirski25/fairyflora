@@ -12,8 +12,8 @@ const employeeRouter = Router();
 
 employeeRouter.get("/", getAllEmployees);
 employeeRouter.get("/:id", getEmployeeById);
-employeeRouter.post("/create", createEmployee);
-employeeRouter.put("/:id/update", updateEmployee);
-employeeRouter.delete("/:id/delete", deleteEmployee);
+employeeRouter.post("/", createEmployee);
+employeeRouter.put("/:id", updateEmployee);
+employeeRouter.delete("/:id", deleteEmployee);
 
 export default employeeRouter;

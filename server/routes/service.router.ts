@@ -11,8 +11,8 @@ const serviceRouter = Router();
 
 serviceRouter.get("/", getAllServices);
 serviceRouter.get("/:id", getServiceById);
-serviceRouter.post("/create", createService);
-serviceRouter.put("/:id/update", updateService);
-serviceRouter.delete("/:id/delete", deleteService);
+serviceRouter.post("/", createService);
+serviceRouter.put("/:id", updateService);
+serviceRouter.delete("/:id", deleteService);
 
 export default serviceRouter;

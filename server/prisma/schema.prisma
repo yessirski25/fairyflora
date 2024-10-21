@@ -81,7 +81,7 @@ model Inventory {
   id                 Int          @id @default(autoincrement())
   branchId           Branch       @relation(fields: [branchInventoryId], references: [id])
   branchInventoryId  Int   
-  arielPoweder       Int
+  arielPowder       Int
   downyFabcon        Int
   zonrox             Int
 }

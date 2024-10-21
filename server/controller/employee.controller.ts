@@ -50,7 +50,7 @@ export const getEmployeeById = async (req, res) => {
 export const updateEmployee = async (req, res) => {
 
     const employeeId = req.params.id;
-    const { firstName, middleName, lastName, salary, contactNumber, dateHired, role, emailAddress, password } = req.body;
+    const { firstName, middleName, lastName, salary, contactNumber, dateHired, role, emailAddress, password, assignedBranchId } = req.body;
 
     try {
         const employee = await employeeClient.update({
@@ -66,7 +66,8 @@ export const updateEmployee = async (req, res) => {
                 dateHired, 
                 role, 
                 emailAddress, 
-                password
+                password,
+                assignedBranchId
             }
         });
 

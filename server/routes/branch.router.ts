@@ -11,8 +11,8 @@ const branchRouter = Router();
 
 branchRouter.get("/", getAllBranches);
 branchRouter.get("/:id", getBranchById);
-branchRouter.post("/create", createBranch);
-branchRouter.put("/:id/update", updateBranch);
-branchRouter.delete("/:id/delete", deleteBranch);
+branchRouter.post("/", createBranch);
+branchRouter.put("/:id", updateBranch);
+branchRouter.delete("/:id", deleteBranch);
 
 export default branchRouter;
