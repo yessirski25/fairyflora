@@ -13,7 +13,7 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: "http://localhost:5173", credentials: true}));
 
 app.use('/employee', employeeRouter);
 app.use('/branch', branchRouter);
@@ -22,15 +22,15 @@ app.use('/addon', addonRouter);
 app.use('/customer', customerRouter);
 app.use('/transaction', transactionRouter);
 app.use('/inventory', inventoryRouter);
-app.use((req, res, next) => {
-    res.set("Access-Control-Allow-Origin", process.env.CLIENT_URL);
-    res.set("Access-Control-Allow-Credentials", "true");
-    res.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
-    res.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+// app.use((req, res, next) => {
+//     res.setHeader("Access-Control-Allow-Origin", process.env.CLIENT_URL);
+//     res.setHeader("Access-Control-Allow-Credentials", "true");
+//     res.setHeader("Access-Control-Allow-Headers", 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+//     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
 
-    next();
-  });
-
+//     next();
+//   });
+app.options('/employee/login', cors())
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`)
 });

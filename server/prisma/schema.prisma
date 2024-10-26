@@ -22,7 +22,7 @@ model Employee {
   contactNumber    String
   dateHired        DateTime
   role             String
-  emailAddress      String
+  emailAddress     String     @unique
   password         String
   assignedBranch   Branch     @relation(fields: [assignedBranchId], references: [id])
   assignedBranchId Int
