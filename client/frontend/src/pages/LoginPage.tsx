@@ -8,7 +8,7 @@ export const LoginPage = () => {
     
     const [password, setPassword] = useState('');
     const [emailAddress, setEmailAddress] = useState('');
-    const [error, setError] = useState('');
+    const [error] = useState('');
     const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent) => {

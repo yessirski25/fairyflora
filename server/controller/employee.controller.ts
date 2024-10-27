@@ -163,6 +163,13 @@ export const loginEmployee = async (req, res) => {
     }
 }
 
+export const logoutEmployee = async (req, res) => {
+    res.clearCookie("auth_token").send({
+        success: true,
+        message: "Logged out successfully!"
+    });
+}
+
 export const currentEmployee = async (req, res) => {
     res.json(req.employee);
 }
