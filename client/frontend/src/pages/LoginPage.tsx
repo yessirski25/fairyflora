@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../components/auth-provider/AuthProvider"
 import { Container, TextField, Button, Typography, Box } from '@mui/material';
 
 export const LoginPage = () => {
@@ -9,6 +10,7 @@ export const LoginPage = () => {
     const [password, setPassword] = useState('');
     const [emailAddress, setEmailAddress] = useState('');
     const [error] = useState('');
+    const {setEmployee} = useAuth();
     const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -25,6 +27,7 @@ export const LoginPage = () => {
                 toast.error(response.data.message);
             } else {
                 toast.success("Logged in successfully!");
+                setEmployee(response.data.employee);
                 return navigate("/dashboard");
             }
         } catch (error) {
