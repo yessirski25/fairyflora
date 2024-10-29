@@ -151,8 +151,9 @@ export const loginEmployee = async (req, res) => {
             .cookie("auth_token", accessToken, {
                 maxAge:600000,
                 httpOnly: true,
-                secure: true
-            }).send({ success: true, message: "Login successful!"});
+                secure: process.env.NODE_ENV === "production",
+                path: "/"
+            }).send({ success: true, message: "Login successful!", data: employee});
         } else {
             res.status(400).json({ message: "Either your email or your password is invalid. Double check."});
         }
@@ -164,10 +165,11 @@ export const loginEmployee = async (req, res) => {
 }
 
 export const logoutEmployee = async (req, res) => {
-    res.clearCookie("auth_token").send({
-        success: true,
-        message: "Logged out successfully!"
-    });
+    res.clearCookie("auth_token",{ 
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        path: "/"
+    }).send({ success: true, message: "Logged out successfully!" });
 }
 
 export const currentEmployee = async (req, res) => {

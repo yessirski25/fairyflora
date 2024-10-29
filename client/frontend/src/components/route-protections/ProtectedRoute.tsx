@@ -14,5 +14,5 @@ export default function RouteProtection({children}: RouteProtectionProps) {
         }
     }, [navigate, employee]);
     
-    return children;
+    return <>{children}</>;
 }

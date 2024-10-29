@@ -19,7 +19,7 @@ export default function AuthProvider({
     isLoggedIn,
 }: AuthProviderProps) {
     const [employee, setEmployee] = useState<Employee | null>(null);
-    
+
     return (
         <AuthContext.Provider value={{employee, setEmployee}}>
             {children}
