@@ -14,12 +14,12 @@ import {
 const employeeRouter = Router();
 
 employeeRouter.get("/", getAllEmployees);
+employeeRouter.get("/current", validateToken, currentEmployee);
 employeeRouter.get("/:id", getEmployeeById);
-employeeRouter.get("/current", currentEmployee);
 employeeRouter.post("/", createEmployee);
-employeeRouter.post("/login", loginEmployee);
-employeeRouter.post("/logout", logoutEmployee);
 employeeRouter.put("/:id", updateEmployee);
 employeeRouter.delete("/:id", deleteEmployee);
+employeeRouter.post("/login", loginEmployee);
+employeeRouter.post("/logout", logoutEmployee);
 
 export default employeeRouter;

@@ -1,23 +1,20 @@
 import jwt from "jsonwebtoken";
 
-export const validateToken = async (req, res, next) => {
-    let token;
-    let authHeader = req.headers.authorization || req.headers.Authorization;
-    if (authHeader && authHeader.startsWith("Bearer")) {
-        token = authHeader.split(" ")[1];
-        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) =>{
-            if (err) {
-                res.status(401);
-                throw new Error("User not authorized");
-            }
+export const validateToken = (req, res, next) => {
+    const token = req.cookies.auth_token;
 
-            req.employee = decoded.employee;
-            next();
-        });
-
-        if (!token) {
-            res.status(401);
-            throw new Error("Please provide a token for your request");
-        }
+    if (!token) {
+        return res.status(401).json({ message: "Unauthorized: No token provided" });
     }
+
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+        if (err) {
+            console.log("Token verification failed:", err);
+            return res.status(403).json({ message: "Unauthorized: Invalid token" });
+        }
+
+        req.employee = decoded.employee;
+        console.log("Token verified. Employee:", req.employee);
+        next();
+    });
 };

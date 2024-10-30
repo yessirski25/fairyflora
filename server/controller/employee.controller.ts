@@ -164,14 +164,18 @@ export const loginEmployee = async (req, res) => {
     }
 }
 
+export const currentEmployee = (req, res) => {
+    console.log("Current employee endpoint hit.");
+    res.json({
+        success: true,
+        data: req.employee
+    });
+};
+
 export const logoutEmployee = async (req, res) => {
     res.clearCookie("auth_token",{ 
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         path: "/"
     }).send({ success: true, message: "Logged out successfully!" });
-}
-
-export const currentEmployee = async (req, res) => {
-    res.json(req.employee);
 }
