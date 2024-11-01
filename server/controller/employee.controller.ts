@@ -165,7 +165,6 @@ export const loginEmployee = async (req, res) => {
 }
 
 export const currentEmployee = (req, res) => {
-    console.log("Current employee endpoint hit.");
     res.json({
         success: true,
         data: req.employee

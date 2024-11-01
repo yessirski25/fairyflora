@@ -14,7 +14,6 @@ export const validateToken = (req, res, next) => {
         }
 
         req.employee = decoded.employee;
-        console.log("Token verified. Employee:", req.employee);
         next();
     });
 };

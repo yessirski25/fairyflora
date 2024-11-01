@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Drawer, List, ListItem, ListItemText, AppBar, Toolbar, Typography, Box, Button } from '@mui/material';
-import { PieChart } from "@mui/icons-material";
+import { Drawer, List, ListItem, ListItemText, ListItemButton, ListItemIcon, AppBar, Toolbar, Typography, Box, Button } from '@mui/material';
+import { PieChart, People, AccountCircle } from "@mui/icons-material";
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
@@ -22,7 +22,7 @@ interface Employee {
 }
 
 export const Dashboard: React.FC = () => {
-  const [selectedPage, setSelectedPage] = useState<'dashboard' | 'settings'>('dashboard');
+  const [selectedPage, setSelectedPage] = useState<'dashboard' | 'employees'>('dashboard');
   const [ employee, setEmployee ] = useState<Employee | null>(null);
   const navigate = useNavigate();
 
@@ -54,8 +54,8 @@ export const Dashboard: React.FC = () => {
     if (selectedPage === 'dashboard') {
       return <Typography variant="h4">Dashboard Page Content</Typography>
     }
-    if (selectedPage === 'settings') {
-      return <Typography variant="h4">Settings Page Content</Typography>;
+    if (selectedPage === 'employees') {
+      return <Typography variant="h4">Employees Page Content</Typography>;
     }
     return null;
   };
@@ -83,7 +83,7 @@ export const Dashboard: React.FC = () => {
   return (
     <Box sx={{ display: 'flex' }}>
       {/* Sidebar */}
-      <Drawer
+      {/* <Drawer
         variant="permanent"
         sx={{
           height: "100vh",
@@ -95,17 +95,26 @@ export const Dashboard: React.FC = () => {
           },
         }}
       >
-        <Toolbar sx={{ height: "100px"}}/>
+        <Toolbar sx={{ height: "100px" }}/>
         <Box sx={{ overflow: 'auto' }}>
-          <List>
-            <ListItem button onClick={() => setSelectedPage('dashboard')}>
-              <PieChart sx={{ marginRight: "10px"}}/>
-              <ListItemText primary="Dashboard" />
-            </ListItem>
-            <ListItem button onClick={() => setSelectedPage('settings')}>
-              <ListItemText primary="Settings" />
-            </ListItem>
-          </List>
+        <List sx={{ height: "80vh"}}>
+          <ListItem disablePadding>
+            <ListItemButton onClick={() => setSelectedPage('dashboard')}>
+              <ListItemIcon sx={{ color: 'green'}}>
+                <PieChart />
+              </ListItemIcon>
+              <ListItemText primary="Dashboard" sx={{ color: 'green'}} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton onClick={() => setSelectedPage('employees')}>
+              <ListItemIcon sx={{ color: 'green'}}>
+                <People />
+              </ListItemIcon>
+              <ListItemText primary="Employees" sx={{ color: 'green'}} />
+            </ListItemButton>
+          </ListItem>
+        </List>
         </Box>
           <form onSubmit={handleSubmit}>
           <Button
@@ -118,7 +127,7 @@ export const Dashboard: React.FC = () => {
             Logout
           </Button>
         </form>
-      </Drawer>
+      </Drawer> */}
 
       {/* Main Content */}
       <Box
@@ -132,22 +141,22 @@ export const Dashboard: React.FC = () => {
           height: '100vh',
         }}
       >
-        <AppBar position="fixed" sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}>
+        <AppBar position="fixed" sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`, bgcolor: "white" }}>
           <Toolbar sx={{
             display: "flex",
             justifyContent: "space-between"
           }}>
-            <Typography variant="h6" noWrap>
+            <Typography variant="h6" noWrap color='green'>
               Dashboard
             </Typography>
-            <Typography variant='h6'>{employee?.firstName}</Typography>
+            <Typography variant='h6' noWrap color='green'>
+              <AccountCircle sx={{ marginTop: "-4px", marginRight: "2px"}}/>
+              {employee?.firstName}
+            </Typography>
           </Toolbar>
         </AppBar>
         <Toolbar />
         {renderContent()}
-      </Box>
-      <Box>
-
       </Box>
     </Box>
   );

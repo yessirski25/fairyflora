@@ -28,7 +28,7 @@ export const LoginPage = () => {
             } else {
                 toast.success("Logged in successfully!");
                 setEmployee(response.data);
-                return navigate("/dashboard");
+                return navigate("/admin-dashboard");
             }
         } catch (error) {
             console.error(error);
