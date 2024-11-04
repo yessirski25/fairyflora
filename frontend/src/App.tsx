@@ -22,17 +22,14 @@ function App() {
           <AuthProvider>
             <Routes>
               <Route path="/" element={<LoginPage/>} />
-              <Route path="/home" element={
-                <ProtectedRoute>
-                  <Layout/>
-                </ProtectedRoute>
-                } />
-              <Route path="/admin-dashboard" element={<AdminDashboard/>} />
-              <Route path="/emp-dashboard" element={<EmpDashboard/>} />
-              <Route path="/branch" element={<Branch/>} />
-              <Route path="/employee" element={<Employee/>} />
-              <Route path="/inventory" element={<Inventory/>} />
-              <Route path="/services" element={<Services/>} />
+              <Route path="/home" element={<ProtectedRoute><Layout/></ProtectedRoute>}>
+                <Route path="admin-dashboard" element={<AdminDashboard/>} />
+                <Route path="emp-dashboard" element={<EmpDashboard/>} />
+                <Route path="branch" element={<Branch/>} />
+                <Route path="employee" element={<Employee/>} />
+                <Route path="inventory" element={<Inventory/>} />
+                <Route path="services" element={<Services/>} />
+              </Route>
             </Routes>
           </AuthProvider>
       </BrowserRouter>

@@ -12,12 +12,12 @@ interface SidebarItem {
 
 // Define sidebar items with role-based access
 export const sidebarItems: SidebarItem[] = [
-  { label: 'Dashboard', icon: <PieChart />, path: '/admin-dashboard', allowedRoles: ['Admin'] },
-  { label: 'Employees', icon: <People />, path: '/employees', allowedRoles: ['Admin'] },
-  { label: 'Branch', icon: <Store />, path: '/branch', allowedRoles: ['Admin'] },
-  { label: 'Services', icon: <LocalLaundryService />, path: '/services', allowedRoles: ['Admin'] },
-  { label: 'Inventory', icon: <Inventory />, path: '/services', allowedRoles: ['Admin'] },
-  { label: 'Dashboard', icon: <PieChart />, path: '/emp-dashboard', allowedRoles: ['Employee'] },
+  { label: 'Dashboard', icon: <PieChart />, path: 'admin-dashboard', allowedRoles: ['Admin'] },
+  { label: 'Employees', icon: <People />, path: 'employees', allowedRoles: ['Admin'] },
+  { label: 'Branch', icon: <Store />, path: 'branch', allowedRoles: ['Admin'] },
+  { label: 'Services', icon: <LocalLaundryService />, path: 'services', allowedRoles: ['Admin'] },
+  { label: 'Inventory', icon: <Inventory />, path: 'services', allowedRoles: ['Admin'] },
+  { label: 'Dashboard', icon: <PieChart />, path: 'emp-dashboard', allowedRoles: ['Employee'] },
 ];
 
 interface SidebarProps {
@@ -42,15 +42,15 @@ interface SidebarProps {
           [`& .MuiDrawer-paper`]: { width, boxSizing: 'border-box' },
         }}
       >
-        {/* <Toolbar>
-          <Typography variant="h6" noWrap>{title}</Typography>
-        </Toolbar> */}
+        <Toolbar>
+          <Typography variant="h6" noWrap>Fairy Flora Icon</Typography>
+        </Toolbar>
         <Divider />
         <List>
           {filteredItems.map((item) => (
             <ListItem button key={item.label} onClick={() => navigate(item.path)}>
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.label} />
+              <ListItemIcon sx={{ color: "green"}}>{item.icon}</ListItemIcon>
+              <ListItemText sx={{ color: "green"}} primary={item.label} />
             </ListItem>
           ))}
         </List>

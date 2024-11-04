@@ -4,6 +4,7 @@ import { AccountCircle } from '@mui/icons-material';
 import axios from "axios";
 import Sidebar from '../sidebar/Sidebar'
 import { sidebarItems } from '../sidebar/Sidebar';
+import { Outlet } from "react-router-dom";
 
 export const Layout = () => {
   const [employeeRole, setEmployeeRole] = useState('');
@@ -39,9 +40,10 @@ export const Layout = () => {
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <Sidebar width={240} items={sidebarItems} userRole={userRole} />
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3, height: 1 }}>
         <Toolbar />
-        {/* Main content goes here */}
+        {/* render pages here */}
+        <Outlet/>
       </Box>
       <Box>
         <Typography>Fairy Flora</Typography>
