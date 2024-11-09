@@ -1,34 +1,18 @@
-import { useNavigate } from "react-router-dom";
-import { Inventory, LocalLaundryService, People, PieChart, Store } from "@mui/icons-material"
-import { Drawer, Toolbar, Typography, Divider, List, ListItem, ListItemText, ListItemIcon } from "@mui/material"
+import { Link, useLocation } from "react-router-dom";
+import { Drawer, Toolbar, Typography, List, ListItemText, ListItemIcon, ListItemButton } from "@mui/material"
+import { SidebarItem } from "./SidebarItems";
+
 type Role = 'Admin' | 'Employee' | 'Customer';
-
-interface SidebarItem {
-  label: string;
-  icon: React.ReactNode;
-  path: string;
-  allowedRoles: Role[]; // Array of roles allowed to see this item
-}
-
-// Define sidebar items with role-based access
-export const sidebarItems: SidebarItem[] = [
-  { label: 'Dashboard', icon: <PieChart />, path: 'admin-dashboard', allowedRoles: ['Admin'] },
-  { label: 'Employees', icon: <People />, path: 'employees', allowedRoles: ['Admin'] },
-  { label: 'Branch', icon: <Store />, path: 'branch', allowedRoles: ['Admin'] },
-  { label: 'Services', icon: <LocalLaundryService />, path: 'services', allowedRoles: ['Admin'] },
-  { label: 'Inventory', icon: <Inventory />, path: 'services', allowedRoles: ['Admin'] },
-  { label: 'Dashboard', icon: <PieChart />, path: 'emp-dashboard', allowedRoles: ['Employee'] },
-];
 
 interface SidebarProps {
     width?: number;
     items: SidebarItem[];
     userRole: Role; // Pass the current user's role as a prop
   }
-  
+
   
   const Sidebar: React.FC<SidebarProps> = ({ width = 240, items, userRole }) => {
-    const navigate = useNavigate();
+    const location = useLocation();
   
     // Filter items based on the allowed roles
     const filteredItems = items.filter(item => item.allowedRoles.includes(userRole));
@@ -42,16 +26,16 @@ interface SidebarProps {
           [`& .MuiDrawer-paper`]: { width, boxSizing: 'border-box' },
         }}
       >
-        <Toolbar>
+        <Toolbar sx={{ marginY: "20px"}}>
           <Typography variant="h6" noWrap>Fairy Flora Icon</Typography>
         </Toolbar>
-        <Divider />
+        {/* <Divider /> */}
         <List>
           {filteredItems.map((item) => (
-            <ListItem button key={item.label} onClick={() => navigate(item.path)}>
+            <ListItemButton sx={{ marginY: "10px", marginX: "3px", cursor: "pointer"}} button key={item.label} component={Link} to={item.path} selected={location.pathname == item.path}>
               <ListItemIcon sx={{ color: "green"}}>{item.icon}</ListItemIcon>
               <ListItemText sx={{ color: "green"}} primary={item.label} />
-            </ListItem>
+            </ListItemButton>
           ))}
         </List>
       </Drawer>

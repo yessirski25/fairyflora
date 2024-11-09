@@ -10,7 +10,6 @@ import { Layout } from "./components/layout/Layout";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProtectedRoute from "./components/route-protections/ProtectedRoutes";
-import AuthProvider from "./components/auth-provider/AuthProvider";
 import './App.css'
 
 function App() {
@@ -19,10 +18,12 @@ function App() {
     <>
       <BrowserRouter>
         <ToastContainer/>
-          <AuthProvider>
             <Routes>
               <Route path="/" element={<LoginPage/>} />
-              <Route path="/home" element={<ProtectedRoute><Layout/></ProtectedRoute>}>
+              <Route path="/home" element={
+                <ProtectedRoute>
+                  <Layout/>
+                </ProtectedRoute>}>
                 <Route path="admin-dashboard" element={<AdminDashboard/>} />
                 <Route path="emp-dashboard" element={<EmpDashboard/>} />
                 <Route path="branch" element={<Branch/>} />
@@ -31,7 +32,6 @@ function App() {
                 <Route path="services" element={<Services/>} />
               </Route>
             </Routes>
-          </AuthProvider>
       </BrowserRouter>
     </>
   )

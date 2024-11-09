@@ -3,8 +3,9 @@ import { CssBaseline, Box, Toolbar, AppBar, Typography } from '@mui/material'
 import { AccountCircle } from '@mui/icons-material';
 import axios from "axios";
 import Sidebar from '../sidebar/Sidebar'
-import { sidebarItems } from '../sidebar/Sidebar';
+import { sidebarItems } from '../sidebar/SidebarItems';
 import { Outlet } from "react-router-dom";
+
 
 export const Layout = () => {
   const [employeeRole, setEmployeeRole] = useState('');
@@ -45,9 +46,6 @@ export const Layout = () => {
         {/* render pages here */}
         <Outlet/>
       </Box>
-      <Box>
-        <Typography>Fairy Flora</Typography>
-      </Box>
       <Box
         component="main"
         sx={{
@@ -56,7 +54,7 @@ export const Layout = () => {
           ml: `${drawerWidth}px`,
           display: 'flex',
           flexDirection: 'column',
-          height: '100vh',
+          height: '90vh',
         }}
       >
         <AppBar position="fixed" sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`, bgcolor: "white" }}>

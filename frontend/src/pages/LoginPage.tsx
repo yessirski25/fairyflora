@@ -41,7 +41,7 @@ export const LoginPage = () => {
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-        height="100vh"
+        height="90vh"
       >
         <Typography variant="h4" component="h1" gutterBottom>
           Login
