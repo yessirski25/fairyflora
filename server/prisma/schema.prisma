@@ -51,25 +51,25 @@ model Customer {
 model Service {
   id                 Int          @id @default(autoincrement())
   serviceName        String
-  service            String[]
+  serviceItems       Json
   serviceCode        String
   totalPrice         Int
-  description        String 
-  transactionPkg     Transaction  @relation(fields: [transactionPkgId], references: [id])
-  transactionPkgId   Int
+  description        String
+  transactionId      Int?
+  transaction        Transaction? @relation(fields: [transactionId], references: [id])
 }
 
 model Addon {
   id                 Int          @id @default(autoincrement())
   addonName          String
   addonPrice         Int
-  addonPkg           Transaction  @relation(fields: [addonPkgId], references: [id])
-  addonPkgId         Int
+  transactionId      Int?  
+  transaction        Transaction? @relation(fields: [transactionId], references: [id]) 
 }
 
 model Transaction {
   id                 Int            @id @default(autoincrement())
-  laundryService     Service[]
+  laundryService     Service[]      
   quantity           Int
   price              Int
   addon              Addon[]

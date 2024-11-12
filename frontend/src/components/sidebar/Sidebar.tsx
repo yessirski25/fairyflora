@@ -32,7 +32,7 @@ interface SidebarProps {
         {/* <Divider /> */}
         <List>
           {filteredItems.map((item) => (
-            <ListItemButton sx={{ marginY: "10px", marginX: "3px", cursor: "pointer"}} button key={item.label} component={Link} to={item.path} selected={location.pathname == item.path}>
+            <ListItemButton sx={{ marginY: "10px", marginX: "3px", cursor: "pointer"}} key={item.label} component={Link} to={item.path} selected={location.pathname === item.path}>
               <ListItemIcon sx={{ color: "green"}}>{item.icon}</ListItemIcon>
               <ListItemText sx={{ color: "green"}} primary={item.label} />
             </ListItemButton>

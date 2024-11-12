@@ -55,7 +55,7 @@ export const getServiceById = async (req, res) => {
 export const updateService = async (req, res) => {
 
     const serviceId = req.params;
-    const { serviceName, service, serviceCode, totalPrice, description, transactionPkgId } = req.body;
+    const { serviceName, serviceItems, serviceCode, totalPrice, description, transactionId } = req.body;
 
     try {
         const sservice = await serviceClient.update({
@@ -64,11 +64,11 @@ export const updateService = async (req, res) => {
             },
             data: {
                 serviceName, 
-                service, 
+                serviceItems, 
                 serviceCode, 
                 totalPrice, 
                 description,
-                transactionPkgId
+                transactionId
             }
         });
 

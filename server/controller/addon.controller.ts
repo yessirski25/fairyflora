@@ -8,7 +8,7 @@ export const createAddon = async (req, res) => {
     const addonData = req.body;
 
     try {
-        const addon = addonClient.create({
+        const addon = await addonClient.create({
             data: addonData,
         });
 
@@ -23,7 +23,7 @@ export const createAddon = async (req, res) => {
 export const getAllAddons = async (req, res) => {
 
     try {
-        const addons = addonClient.findMany();
+        const addons = await addonClient.findMany();
 
         res.status(200).json({ data: addons });
     } catch(error) {
@@ -38,7 +38,7 @@ export const getAddonById = async (req, res) => {
     const addonId = req.params;
 
     try {
-        const addon = addonClient.findUnique({
+        const addon = await addonClient.findUnique({
             where: {
                 id: addonId,
             }
@@ -54,18 +54,18 @@ export const getAddonById = async (req, res) => {
 //update addon 
 export const updateAddon = async (req, res) => {
 
-    const addonId = req.params;
-    const { addonName, addonPrice, addonPkg } = req.body;
+    const addonId = parseInt(req.params.id);
+    const { addonName, addonPrice, transactionId } = req.body;
 
     try {
-        const addon = addonClient.update({
+        const addon = await addonClient.update({
             where: {
                 id: addonId,
             },
             data: {
                 addonName,
                 addonPrice,
-                addonPkg
+                transactionId
             }
         });
 
@@ -79,10 +79,10 @@ export const updateAddon = async (req, res) => {
 //delete addon 
 export const deleteAddon = async (req, res) => {
 
-    const addonId = req.params;
+    const addonId = parseInt(req.params.id);
 
     try {
-        const addon = addonClient.delete({
+        const addon = await addonClient.delete({
             where: {
                 id: addonId,
             }
