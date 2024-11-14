@@ -50,8 +50,8 @@ export const getCustomerById = async (req, res) => {
 
 //udpate customer  
 export const updateCustomer = async (req, res) => {
-    const customerId = req.params;
-    const { customerName, customerContact, orders } = req.body;
+    const customerId = parseInt(req.params.id);
+    const { customerName, customerContact, transactions } = req.body;
 
     try {
         const customer = await customerClient.update({
@@ -61,7 +61,7 @@ export const updateCustomer = async (req, res) => {
             data: {
                 customerName,
                 customerContact,
-                orders
+                transactions
             }
         });
 
@@ -74,7 +74,7 @@ export const updateCustomer = async (req, res) => {
 
 //delete customer  
 export const deleteCustomer = async (req, res) => {
-    const customerId = req.params;
+    const customerId = parseInt(req.params.id);
 
     try {
         const customer = await customerClient.delete({

@@ -45,7 +45,7 @@ model Customer {
   id                        Int            @id @default(autoincrement())
   customerName              String
   customerContact           String
-  orders                    Transaction[]  
+  transactions              Transaction[]
 }
 
 model Service {
@@ -73,8 +73,8 @@ model Transaction {
   quantity           Int
   price              Int
   addon              Addon[]
-  customerName       Customer       @relation(fields: [customerId], references: [id])
-  customerId         Int
+  customerId         Int       
+  customer           Customer @relation(fields: [customerId], references: [id])
 }
 
 model Inventory {

@@ -11,7 +11,7 @@ const customerRouter = Router();
 
 customerRouter.get("/", getAllCustomers);
 customerRouter.get("/:id", getCustomerById);
-customerRouter.post("/:id", createCustomer);
+customerRouter.post("/", createCustomer);
 customerRouter.put("/:id", updateCustomer);
 customerRouter.delete("/:id", deleteCustomer);
 
